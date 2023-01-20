@@ -18,8 +18,8 @@ pipeline {
              // script {
              //    commit_id = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
              // }
-              sh "cd frontend && npm install"
-              sh "cd frontend && npm run build"	  
+              sh "npm install"
+              sh "npm run build"	  
             }
        }	
   	    stage("build & SonarQube analysis") {
