@@ -22,19 +22,17 @@ pipeline {
               sh "cd frontend && npm run build"	  
             }
        }	
-  	    stage('SCM') {
-		    steps {
-			    checkout scm
-		    }
-  	    }
-  	    stage('SonarQube Analysis') {
-		    steps {
-			    def scannerHome = tool 'makpar-sonar-scanner'
-                withSonarQubeEnv() {
-      		        sh "${scannerHome}/bin/sonar-scanner"
-    		    }
-            }
-		}
+  	    node {
+  stage('SCM') {
+    checkout scm
+  }
+  stage('SonarQube Analysis') {
+    def scannerHome = tool 'SonarScanner';
+    withSonarQubeEnv() {
+      sh "${scannerHome}/bin/sonar-scanner"
+    }
+  }
+}
   	
         stage('Upload') {
           steps {
