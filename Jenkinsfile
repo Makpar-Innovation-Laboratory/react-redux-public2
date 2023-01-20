@@ -13,14 +13,14 @@ pipeline {
     stages {
         // This is a stage.
         stage('Build') {
-          steps {
+            steps {
              // Get SHA1 of current commit
              // script {
              //    commit_id = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
              // }
               sh "cd frontend && npm install"
               sh "cd frontend && npm run build"	  
-         }
+            }
        }	
   	    stage('SCM') {
 		    steps {
@@ -30,10 +30,10 @@ pipeline {
   	    stage('SonarQube Analysis') {
 		    steps {
 			    def scannerHome = tool 'makpar-sonar-scanner'
+                withSonarQubeEnv() {
+      		        sh "${scannerHome}/bin/sonar-scanner"
+    		    }
             }
-    	    withSonarQubeEnv() {
-      		    sh "${scannerHome}/bin/sonar-scanner"
-    		}
 		}
   	
         stage('Upload') {
