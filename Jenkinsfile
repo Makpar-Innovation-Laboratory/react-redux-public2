@@ -29,7 +29,7 @@ pipeline {
   	    }
   	    stage('SonarQube Analysis') {
 		    steps {
-			    def scannerHome = tool 'makpar-sonar-scanner';
+			    def scannerHome = tool 'makpar-sonar-scanner'
             }
     	    withSonarQubeEnv() {
       		    sh "${scannerHome}/bin/sonar-scanner"
