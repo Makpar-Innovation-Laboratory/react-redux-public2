@@ -22,7 +22,7 @@ pipeline {
               sh "npm run build"	  
             }
        }	
-  	    stage('Sonarqube') {
+  	    stage('Testing/Sonarqube') {
     environment {
         scannerHome = tool 'makpar-sonar-scanner'
     }
