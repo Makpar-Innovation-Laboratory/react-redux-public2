@@ -24,7 +24,7 @@ pipeline {
        }	
   	    stage('Sonarqube') {
     environment {
-        scannerHome = tool 'makpar-sonar-scanneer'
+        scannerHome = tool 'makpar-sonar-scanner'
     }
     steps {
         withSonarQubeEnv('sonarqube') {
