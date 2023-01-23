@@ -12,7 +12,7 @@ pipeline {
     // Each stage can execute one or more steps.
     stages {
         // This is a stage.
-        stage('Build') {
+        stage('NodeJS Build') {
             steps {
              // Get SHA1 of current commit
              // script {
@@ -22,21 +22,19 @@ pipeline {
               sh "npm run build"	  
             }
        }	
-  	    stage("build & SonarQube analysis") {
-            agent any
-            steps {
-              withSonarQubeEnv('My SonarQube Server') {
-                sh 'mvn clean package makpar-sonar-scanner'
-              }
-            }
-          }
-          stage("Quality Gate") {
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
-            }
-          }
+  	    stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'makpar-sonar-scanneer'
+    }
+    steps {
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
+    }
+}
 
   	
         stage('Upload') {
