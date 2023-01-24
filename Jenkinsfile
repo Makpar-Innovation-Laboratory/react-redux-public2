@@ -40,7 +40,7 @@ pipeline {
         stage('Upload') {
           steps {
             
-           sh "cd frontend; aws s3 cp ./build/ s3://jenkins-makpar-innolab-aws-devops-template2 --recursive"
+           sh "aws s3 cp ./build/ s3://jenkins-makpar-innolab-aws-devops-template2 --recursive"
           }
         }
     }
