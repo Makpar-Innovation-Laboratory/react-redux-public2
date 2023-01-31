@@ -1,56 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
+import Dashboard from './components/dashboard/dashboard';
+import Preferences from './components/preferences/preferences';
+import Login from './components/login/login'
+
 function App() {
+  const [token, setToken] = useState();
+  const [dataA, setDataA] = useState();
+  if (!token) {
+    return <Login setToken={setToken} />
+  }
+
+  const handleClick = async () => {
+    const data = await fetch('https://6vuj1jpl91.execute-api.us-east-1.amazonaws.com/prod/cognito', {
+      mode: "no-cors",
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    console.log(data)
+    return
+  };
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+    <div className="wrapper">
+      <h1>Application</h1>
+      <button onClick={() => handleClick()}></button>
+      <h3>{dataA}</h3>
+      {/* <BrowserRouter>
+        <Routes>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route path="/preferences">
+            <Preferences />
+          </Route>
+        </Routes>
+      </BrowserRouter> */}
     </div>
   );
 }
