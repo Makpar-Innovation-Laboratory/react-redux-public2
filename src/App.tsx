@@ -8,6 +8,7 @@ import './App.css';
 
 function App() {
   const [token, setToken] = useState();
+  const dataA = ""
   if (!token) {
     return <Login setToken={setToken} />
   }
