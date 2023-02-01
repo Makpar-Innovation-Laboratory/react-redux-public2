@@ -4,7 +4,7 @@ import './App.css';
 
 // import Dashboard from './components/dashboard/dashboard';
 // import Preferences from './components/preferences/preferences';
-// import Login from './components/login/login'
+ import Login from './components/login/login'
 
 function App() {
   const [token, setToken] = useState();
