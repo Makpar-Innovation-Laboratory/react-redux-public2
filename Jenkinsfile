@@ -21,6 +21,7 @@ pipeline {
               sh "npm test -- --coverage"	  
             }
        }
+    }
     stages {
         // This is a stage.
         stage('NodeJS Build') {
@@ -32,7 +33,8 @@ pipeline {
               sh "npm install"
               sh "npm run build"	  
             }
-       }	
+       }
+    }	
   	    stage('Testing/Sonarqube') {
     environment {
         scannerHome = tool 'makpar-sonar-scanner'
