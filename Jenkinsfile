@@ -12,6 +12,17 @@ pipeline {
     // Each stage can execute one or more steps.
     stages {
         // This is a stage.
+        stage('Coverage Test') {
+            steps {
+             // Get SHA1 of current commit
+             // script {
+             //    commit_id = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+             // }
+              sh "npm jest --coverage"	  
+            }
+       }
+    stages {
+        // This is a stage.
         stage('NodeJS Build') {
             steps {
              // Get SHA1 of current commit
