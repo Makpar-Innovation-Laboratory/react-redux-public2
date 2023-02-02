@@ -18,7 +18,7 @@ pipeline {
              // script {
              //    commit_id = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
              // }
-              sh "npm jest --coverage"	  
+              sh "npm test -- --coverage"	  
             }
        }
     stages {
