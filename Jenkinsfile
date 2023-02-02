@@ -10,9 +10,10 @@ pipeline {
     
     // Here you can define one or more stages for your pipeline.
     // Each stage can execute one or more steps.
+    
     stages {
         // This is a stage.
-        stage('Coverage Test') {
+	stage('Coverage Test') {
             steps {
              // Get SHA1 of current commit
              // script {
@@ -21,9 +22,6 @@ pipeline {
               sh "npm test -- --coverage"	  
             }
        }
-    }
-    stages {
-        // This is a stage.
         stage('NodeJS Build') {
             steps {
              // Get SHA1 of current commit
@@ -33,8 +31,7 @@ pipeline {
               sh "npm install"
               sh "npm run build"	  
             }
-       }
-    }
+       }  
   	    stage('Testing/Sonarqube') {
     environment {
         scannerHome = tool 'makpar-sonar-scanner'
