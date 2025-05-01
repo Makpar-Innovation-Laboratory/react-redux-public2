@@ -24,7 +24,7 @@ pipeline {
 
         stage('Upload') {
             steps {
-                sh 'echo "complete!"'
+                sh 'echo "complete"'
             }
         }
     }
